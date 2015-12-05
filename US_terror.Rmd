@@ -289,8 +289,11 @@ The number of incidents in most of the categories seems limited. We might be mor
 
 ```{r i.year1, echo=FALSE, warning=FALSE, message=FALSE}
 ## Make a data frame just for plotting
-## Set up a column of all the years
-plot3.df <- data.frame(iyear = (1992:2014))
+## Set up a column of all the years and all the perp.cat values
+plot3.df <- data.frame(iyear = rep(1994:2014, 
+                                   length(unique(us_94_14.df$perp.cat))))
+plot3.df <- arrange(plot3.df, iyear)
+plot3.df$perp.cat <- unique(us_94_14.df$perp.cat)
 
 plot3a.df <- us_94_14.df %>% 
     group_by(perp.cat, iyear) %>% 
@@ -299,10 +302,10 @@ plot3a.df <- us_94_14.df %>%
 plot3b.df <- left_join(plot3.df, plot3a.df)
 
 ## Fix some NA values for plotting
-plot3.df$perp.cat[is.na(plot3.df$perp.cat)] <- "N/A"
-plot3.df$Incidents[is.na(plot3.df$Incidents)] <- 0
+plot3b.df$perp.cat[is.na(plot3b.df$perp.cat)] <- "N/A"
+plot3b.df$Incidents[is.na(plot3b.df$Incidents)] <- 0
 
-yi1 <- ggplot(filter(plot3.df, perp.cat %in% 
+yi1 <- ggplot(filter(plot3b.df, perp.cat %in% 
                         c("eco-terror", "anti-abortion", "N/A")), 
                     aes(iyear, Incidents, color = perp.cat))
 
@@ -319,7 +322,7 @@ All of these large categories appear to be less frequent in recent years than in
 ```{r i.year2, echo=FALSE, warning=FALSE, message=FALSE}
 ## Make a data frame just for plotting
 
-yi2 <- ggplot(filter(plot3.df, perp.cat %in% 
+yi2 <- ggplot(filter(plot3b.df, perp.cat %in% 
                         c("right-wing", "jihadis", 
                           "anti-minority", "anti-Muslim")), 
                     aes(iyear, Incidents, color = perp.cat))
@@ -329,7 +332,21 @@ yi2 + geom_line(aes(group=perp.cat), size=2) +
     ggtitle("Incident Count by Year") + 
     xlab("Year of Incident")
 
+library(tidyr)
+plot3b.df %>% 
+    filter(perp.cat %in% c("right-wing", "jihadis", 
+                          "anti-minority", "anti-Muslim")) %>% 
+    spread(perp.cat, Incidents)%>% 
+    knitr::kable()
 
 ```
+
+Incidents in these smaller categories have occurred sporadically since 1994. It's not clear from the chart that any were increasing in frequency through 2014.
+
+# Conclusion
+
+From 1994 Through 2014, the incidence of terrroris acts in the US appears to have decreased. This seems to be consistent with the general trend for violent crime in the US during this period. There seems to be no evidence of a widespread backlash against Muslims.
+
+The terrorist attacks with the greatest impact are of course those producing mass casualties. These events are few in number (essentially 5 events out of 566 in this data set) and seemed to arrive "out of the blue". As I write this in December, 2015 it's not clear that the immediate future is going to be like the recent past. A string of jihadi acts that build on events since 2013 may alter the security environment in the US considerably.
 
 
