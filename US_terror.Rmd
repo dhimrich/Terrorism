@@ -1,7 +1,7 @@
 ---
 title: "Terrorism in the US, 1994-2014"
 author: "David Himrich"
-date: "December 4, 2015"
+date: "December 5, 2015"
 output: html_document
 ---
 
@@ -11,7 +11,8 @@ This document is an analysis of a portion of the Global Terrorism Database (GTD)
 
 ## About this Document
 
-The HTML file for this analysis is created in RStudio using [R Markdown](rmarkdown.rstudio.com) and the knitr package for the R statistical programming language. The R commands to produce the analysis are embedded in the document. RStudio users will be able to reproduce this study by copying the two files described above as well as the US\_terror.Rmd file into the working directory and using the knitr package to produce an HTML output document from the .Rmd file. I will be publishing the .Rmd file and the data set on GitHub in the very near future.
+The HTML file for this analysis is created in RStudio using [R Markdown](rmarkdown.rstudio.com) and the knitr package for the R statistical programming language. The R commands to produce the analysis are embedded in the document. RStudio users will be able to reproduce this study by copying the two .csv files exported from the Excel files described above as well as the US\_terror.Rmd file into the working directory and using the knitr package to produce an HTML output document from the .Rmd file. The Github repository for this project is [https://github.com/dhimrich/Terrorism.git]. 
+
 
 # Data Preparation
 
