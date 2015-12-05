@@ -1,7 +1,7 @@
 ---
 title: "Terrorism in the US, 1994-2014"
 author: "David Himrich"
-date: "December 2, 2015"
+date: "December 4, 2015"
 output: html_document
 ---
 
@@ -11,7 +11,7 @@ This document is an analysis of a portion of the Global Terrorism Database (GTD)
 
 ## About this Document
 
-The HTML file for this analysis is created in RStudio using [R Markdown](rmarkdown.rstudio.com) and the knitr package for the R statistical programming language. The R commands to produce the analysis are embedded in the document. RStudio users will be able to reproduced this study by copying the two files described above as well as the US\_terror.Rmd file into the working directory and using the knitr package to produce an HTML output document from the .Rmd file. The GitHub repository containing the .Rmd file and the small US dataset used for the analysis is [here](github.com/dhimrich/x).
+The HTML file for this analysis is created in RStudio using [R Markdown](rmarkdown.rstudio.com) and the knitr package for the R statistical programming language. The R commands to produce the analysis are embedded in the document. RStudio users will be able to reproduce this study by copying the two files described above as well as the US\_terror.Rmd file into the working directory and using the knitr package to produce an HTML output document from the .Rmd file. I will be publishing the .Rmd file and the data set on GitHub in the very near future.
 
 # Data Preparation
 
@@ -244,6 +244,7 @@ plot.df <- mutate(plot.df, casualties = nkill + nwound)
 
 bi <- ggplot(plot.df, aes(perp.cat))
 bi + geom_bar() + ggtitle("Incidents by Perpetrator Category") +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1, vjust = 0.8)) +
     xlab("Perpetrator Category") + ylab("Incident Count")
 
 ```
@@ -257,6 +258,7 @@ In terms of risk perception, we are probably more interested in the number of ca
 bc <- ggplot(plot.df, aes(perp.cat, casualties))
 bc + geom_bar(stat = "identity") + 
     ggtitle("Casualties by Perpetrator Category") +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1, vjust = 0.8)) +
     xlab("Perpetrator Category") + ylab("Casualties")
 
 ```
